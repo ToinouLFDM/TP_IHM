@@ -1,0 +1,23 @@
+import javax.swing.* ;
+
+import java.awt.*;
+
+public class PanelResultatCouleur  extends JPanel {
+		JLabel resultat;
+		int entierValeurRouge=0;
+		int entierValeurVert=0;
+		int entierValeurBleu=0;
+		Color test;
+		
+		
+	public  PanelResultatCouleur  (Color parColor) {
+		resultat= new JLabel(parColor.toString());
+		resultat.setForeground(parColor);
+		
+	
+		add(resultat);
+		
+	}
+
+			
+}
