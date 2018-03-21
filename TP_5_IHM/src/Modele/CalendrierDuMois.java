@@ -16,6 +16,7 @@ public class CalendrierDuMois {
 		}
 		date = new Date (2,mois,annee);
 		indiceJour = indiceJour+1 % 7 ;
+		
 		while (date.getMois () == mois) {
 			while(indiceJour<7) {
 				dates.add(date);

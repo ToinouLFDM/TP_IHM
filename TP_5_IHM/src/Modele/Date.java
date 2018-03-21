@@ -2,7 +2,7 @@ package Modele;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class Date {
+public class Date implements Comparable <Date>{
 
 	private int chJour;
 	private int chMois;

@@ -9,6 +9,8 @@ import java.util.GregorianCalendar;
 import Modele.*;
 public class PanelFormulaire extends JPanel implements ActionListener{
 	//declaration des ob00et
+	final static Font FONT_14 =new Font("VERDANA",Font.BOLD,14);
+	final static Font FONT_12 =new Font("VERDANA",Font.BOLD,12);
 	int parJour=new java.util.Date().getDate();
 	int parMois=new java.util.Date().getMonth();
 	int parAn = new java.util.Date().getYear() +2000-100;
@@ -24,11 +26,11 @@ public class PanelFormulaire extends JPanel implements ActionListener{
 	JLabel titre =new JLabel(NomJours[NJour]+" " +Integer.toString(parJour)+" "+NomMois[NMois]+" "+Integer.toString(parAn));
 	
 	JButton finish=new JButton("+");
-	JLabel nom =new JLabel("Titre");
-	JLabel lieu = new JLabel("Lieu");
-	JLabel debut = new JLabel("Debut");
-	JLabel fin = new JLabel("Fin");
-	JLabel desc = new JLabel("Description");
+	JLabel nom =new JLabel("Titre :");
+	JLabel lieu = new JLabel("Lieu :");
+	JLabel debut = new JLabel("Debut :");
+	JLabel fin = new JLabel("Fin :");
+	JLabel desc = new JLabel("Description :");
 	JLabel replaceme = new JLabel(" : ");
 	JLabel replaceme2 = new JLabel(" : ");
 	JLabel empty = new JLabel("");
@@ -100,7 +102,7 @@ public class PanelFormulaire extends JPanel implements ActionListener{
 		
 		//ligne nom
 		
-		constraint.anchor=GridBagConstraints.LINE_START;
+		constraint.anchor=GridBagConstraints.LINE_END;
 		constraint.ipady=5;
 		constraint.gridy=1*coeff;
 		constraint.gridx=0*coeff;
@@ -167,7 +169,7 @@ public class PanelFormulaire extends JPanel implements ActionListener{
 		add(empty2,constraint);
 		
 		//ligne desc
-		constraint.anchor=GridBagConstraints.NORTHWEST;
+		constraint.anchor=GridBagConstraints.NORTHEAST;
 		constraint.weightx=1;
 		constraint.weighty=1;
 		constraint.gridx=0*coeff;
@@ -186,9 +188,14 @@ public class PanelFormulaire extends JPanel implements ActionListener{
 		
 		finish.addActionListener(this);
 		resultat=parAgenda;
-		
-		
-		
+		titre.setFont(FONT_14);
+		lieu.setFont(FONT_12);
+		nom.setFont(FONT_12);
+		debut.setFont(FONT_12);
+		fin.setFont(FONT_12);
+		desc.setFont(FONT_12);
+		replaceme.setFont(FONT_12);
+		replaceme2.setFont(FONT_12);
 		
 		
 	}

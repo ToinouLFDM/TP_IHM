@@ -29,14 +29,14 @@ public class PanelAgenda extends JPanel{
 		PanelCalendrier cal = new PanelCalendrier();
 		cal.setPreferredSize((new Dimension(390,460)));
 		cal.setBackground(new Color(200,200,150));
-		add(cal);
+		add(cal,constraint);
 		
 		constraint.gridx=1;
 		PanelFormulaire form =new PanelFormulaire(agenda1);
 		form.setBackground(new Color(200,200,150));
 		form.setPreferredSize(new Dimension(390,460));
 		
-		add(form);
+		add(form,constraint);
 		
 	}
 
