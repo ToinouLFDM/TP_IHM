@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import Modele.Agenda;
 import Modele.ExceptDate;
 
 public class PanelCalendrier extends JPanel implements ActionListener {
@@ -26,12 +27,15 @@ public class PanelCalendrier extends JPanel implements ActionListener {
 	int nbYear= new java.util.Date().getYear()+2000-100;
 	int  nbMois = new java.util.Date().getMonth();
 	int currentDay;
-	PanelMois panelMois= new PanelMois(nbMois+1,nbYear);
+	Agenda agenda=new Agenda(1);
+	PanelMois panelMois= new PanelMois(nbMois+1,nbYear,agenda);
 	Controleur c;
 	JLabel labelMois= new JLabel(Mois[nbMois],JLabel.LEFT);
 	JLabel annee = new JLabel("An : " + (nbYear),JLabel.CENTER);
 	
-	public PanelCalendrier() throws ExceptDate {
+	public PanelCalendrier(Agenda parAgenda) throws ExceptDate {
+		agenda=parAgenda;
+		panelMois= new PanelMois(nbMois+1,nbYear,agenda);
 		BorderLayout layout =new BorderLayout();
 		JPanel button = new JPanel();
 		button.setLayout(layout);
@@ -109,8 +113,9 @@ public class PanelCalendrier extends JPanel implements ActionListener {
 		System.out.println(nbMois);
 		annee.setText("An : " + nbYear);
 		labelMois.setText(Mois[nbMois]);
+		
 		try {
-			panelMois= new PanelMois(nbMois+1,nbYear);
+			panelMois= new PanelMois(nbMois+1,nbYear,agenda);
 		} catch (ExceptDate e) {
 			e.printStackTrace();
 		}
@@ -129,4 +134,18 @@ public void enregistreEcouteur(Controleur parControleur) {
 			}
 		}
 	}
+public void updateCal() {
+	remove(panelMois);
+	annee.setText("An : " + nbYear);
+	labelMois.setText(Mois[nbMois]);
+	try {
+		panelMois= new PanelMois(nbMois+1,nbYear,agenda);
+	} catch (ExceptDate e) {
+		e.printStackTrace();
+	}
+	BorderLayout layout2= new BorderLayout();
+	panelMois.setBackground(new Color(200,200,150));
+	add(panelMois,layout2.CENTER);
+	enregistreEcouteur(c);
+}
 }

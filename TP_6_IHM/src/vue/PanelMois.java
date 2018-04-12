@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import Modele.Agenda;
 import Modele.CalendrierDuMois;
 import Modele.Date;
+import Modele.Evenement;
 import Modele.ExceptDate;
 
 public class PanelMois extends JPanel implements ActionListener {
@@ -26,11 +27,11 @@ public class PanelMois extends JPanel implements ActionListener {
 	int nb_row;
 	int nb_col;
 	int currentDay= new java.util.Date().getDay();
-	 
+	 Agenda agenda;
 	public PanelMois(int nbMonth,int nbYear, Agenda parAgenda) throws ExceptDate {
 		String [] dictJours = {" Lu"," Ma"," Me"," Je"," Ve"," Sa","Di"};
 		JLabel [] labelJours = new JLabel[7];
-		
+		agenda=parAgenda;
 		GregorianCalendar d = new GregorianCalendar(nbYear,nbMonth-1,1);
 		
 		int day= (d.get (Calendar.DAY_OF_WEEK)==1)?7:d.get (Calendar.DAY_OF_WEEK)-1;
@@ -79,7 +80,6 @@ public class PanelMois extends JPanel implements ActionListener {
 				
 				baseColor=Jours[i][j].getBackground();
 				
-				int n=parAgenda.getTaille();
 				
 				if(tmp.getMois()!=nbMonth)
 					Jours[i][j].setEnabled(false);
@@ -96,7 +96,7 @@ public class PanelMois extends JPanel implements ActionListener {
 				
 		}
 		
-		
+		updateButton();
 		
 	}
 
@@ -105,9 +105,27 @@ public class PanelMois extends JPanel implements ActionListener {
 		BoutonDate bt = (BoutonDate) parEvent.getSource();
 		
 		resetColor();
-		bt.setBackground(new Color(150,150,200));
-		System.out.print(bt.getDate().toString());
+		bt.setBackground(new Color(200,200,250));
+		
 		currentDay =Integer.parseInt( bt.getText());
+		System.out.println("real :" + Integer.toString(currentDay));
+	}
+	public void updateButton() {
+		int n=agenda.getTaille();
+		Evenement [] tabEvt = agenda.getTabEvt();
+		for(int i=0;i<nb_row;i++)
+		{
+			for(int j=0;j<nb_col;j++)
+			{
+				int k=0;
+				//System.out.println("BoutonDate : " + Jours[i][j].getDate().toString());
+				while(k<n && tabEvt[k]!=null) {
+					//System.out.println("EVT :" + tabEvt[k].getDate().toString() );
+					Jours[i][j].setColor(tabEvt[k].getDate());
+					k++;
+					}
+				}
+			}
 	}
 	private void resetColor()
 	{
@@ -118,6 +136,7 @@ public class PanelMois extends JPanel implements ActionListener {
 			{
 				
 				Jours[i][j].setBackground(baseColor);
+				updateButton();
 			}
 		}
 	}

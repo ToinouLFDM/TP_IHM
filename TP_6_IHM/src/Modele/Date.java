@@ -1,8 +1,9 @@
 package Modele;
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class Date implements Comparable <Date>{
+public class Date implements Comparable <Date>, Serializable{
 
 	private int chJour;
 	private int chMois;

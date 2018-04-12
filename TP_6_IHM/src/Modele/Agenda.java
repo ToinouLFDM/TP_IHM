@@ -1,6 +1,8 @@
 package Modele;
 
-public class Agenda {
+import java.io.Serializable;
+
+public class Agenda implements Serializable{
 
 	Evenement [] chEvts;
 	private int chNbEvt;
@@ -90,5 +92,7 @@ public class Agenda {
 		return tabEvt;
 		
 	}
-
+	public Evenement [] getTabEvt() {
+		return chEvts;
+	}
 }

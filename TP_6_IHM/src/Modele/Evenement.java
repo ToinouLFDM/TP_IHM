@@ -1,7 +1,8 @@
 package Modele;
 
+import java.io.Serializable;
 
-public class Evenement {
+public class Evenement implements Serializable{
 
 	private Date date;
 	private String nom;

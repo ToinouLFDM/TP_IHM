@@ -67,7 +67,7 @@ public class PanelFormulaire extends JPanel implements ActionListener{
 			
 	public PanelFormulaire() {
 		
-		Agenda parAgenda = new Agenda(5);
+		
 		initCombobox(Jour,Mois);
 		JComboBox Jour1=new JComboBox(Jour);
 		JComboBox Jour2=new JComboBox(Jour);
@@ -188,7 +188,7 @@ public class PanelFormulaire extends JPanel implements ActionListener{
 		add(zoneDesc,constraint);
 		
 		finish.addActionListener(this);
-		resultat=parAgenda;
+		
 		titre.setFont(FONT_14);
 		lieu.setFont(FONT_12);
 		nom.setFont(FONT_12);
@@ -202,23 +202,12 @@ public class PanelFormulaire extends JPanel implements ActionListener{
 	}
 
 	public void actionPerformed(ActionEvent parEvent) {
-		if(parEvent.getSource()==finish)
-		{
-			
-			
-			
-			try {
-				resultat.ajout(create());
-			} catch (ExceptDate e) {
-				
-				e.printStackTrace();
-			}
-			System.out.println(resultat.toString());
-		}
-	}
-	private Evenement create() throws ExceptDate {
 		
-		Date date = new Date(new java.util.Date().getDate(),new java.util.Date().getMonth()+1,new java.util.Date().getYear()+2000-100);
+		
+	}
+	public Evenement create() throws ExceptDate {
+		
+		Date date = new Date(parJour,parMois+1,parAn);
 		Evenement evt= new Evenement(date,zoneNom.getText(),zoneLieu.getText(),Jour1.getSelectedIndex(), Mois1.getSelectedIndex(),Jour2.getSelectedIndex(),Mois2.getSelectedIndex());
 		return evt;
 	}

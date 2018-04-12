@@ -4,24 +4,32 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.io.File;
+import java.io.Serializable;
 
 import javax.swing.*;
 import Modele.*;
-public class PanelAgenda extends JPanel{
+public class PanelAgenda extends JPanel {
 	public PanelAgenda() throws ExceptDate {
-		Agenda agenda1 =new Agenda(100);
-		Evenement evt1 = new Evenement(new Date(21,1,1997), "TP1","IUT");
-		Evenement evt2 = new Evenement(new Date(21,1,1997), "TP2","IUT");
-		Evenement evt3 = new Evenement(new Date(21,1,1997), "TP3","IUT");
-		agenda1.ajout(evt1);
-		agenda1.ajout(evt2);
-		agenda1.ajout(evt3);
 		
-		PanelCalendrier cal= new PanelCalendrier();
+		Agenda agenda1 =new Agenda(100);
+		Evenement evt = new Evenement(new Date(),"TP","IUT");
+		agenda1.ajout(evt);
+		File Save= new File("Save"+ File.separator + "agenda.ser");
+		
+		if(Save.length()==0) {
+			LectureEcriture.ecriture(Save, agenda1);
+		}
+		else {
+			agenda1=(Agenda) LectureEcriture.lecture(Save);
+		}
+		
+		
+		PanelCalendrier cal= new PanelCalendrier(agenda1);
 		PanelFormulaire form=new PanelFormulaire();
 		
 		
-		Controleur controleur= new Controleur(agenda1,form,cal);
+		Controleur controleur= new Controleur(agenda1,form,cal,Save);
 		GridBagLayout layout = new GridBagLayout();
 		setLayout(layout);
 		GridBagConstraints constraint =new GridBagConstraints() ;
